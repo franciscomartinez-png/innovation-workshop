@@ -562,6 +562,97 @@
       font-weight: 600;
     }
 
+    /* ── Submit CTA ── */
+    .submit-cta {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #FF7600 0%, #E06800 100%);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 1px rgba(255, 118, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.03) 10px,
+        rgba(255,255,255,0.03) 20px
+      );
+    }
+
+    .submit-cta-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .submit-cta-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    .submit-cta-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .submit-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: #ffffff;
+      color: var(--primary);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 150ms ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .submit-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      background: #fff8f2;
+    }
+
+    .submit-cta-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0.4); }
+      70% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 10px rgba(255, 118, 0, 0); }
+      100% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0); }
+    }
+
+    .submit-cta {
+      animation: pulse-ring 2.5s ease-out infinite;
+    }
+
     /* ── Fade transition ── */
     .fade-in {
       animation: fadeIn 200ms ease;
@@ -788,7 +879,8 @@ COMPLETE THESE FIELDS (and suggest a title):
 - DESCRIBE YOUR IDEA: Explain simply — What is it? And how does it work technically?
 - IMPACT & BENEFITS: Write the value logic. How does it generate value for AquaChile?
 - RESOURCES & EFFORT: List what's needed (People, time, equipment) and the estimated cost level.`,
-    fieldFallbacks: {}
+    fieldFallbacks: {},
+    submitUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdIa5IM6AZ2gRk9P8-M2rW0HElriV1Oh2n6KMuSwAKKDfo4Wg/viewform"
   }
 ];
 
@@ -926,6 +1018,22 @@ function render() {
     </div>
     <div class="prompt-text" id="prompt-display">${displayPrompt}</div>
   </div>`;
+
+  // Submit CTA (final step only)
+  if (step.submitUrl) {
+    html += `<div class="submit-cta">
+      <div class="submit-cta-label">Final Step</div>
+      <div class="submit-cta-title">Submit your idea to Ruta de Innovaci\u00f3n 2026</div>
+      <div class="submit-cta-desc">Copy Copilot's output and paste it into the submission form.</div>
+      <a class="submit-cta-btn" href="${step.submitUrl}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 10V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5"/>
+          <path d="m11 13 3 3 5-5"/>
+        </svg>
+        Open Submission Form
+      </a>
+    </div>`;
+  }
 
   // Navigation buttons
   html += `<div class="step-nav-btns">
