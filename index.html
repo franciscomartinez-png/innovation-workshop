@@ -1249,6 +1249,8 @@ let celebrationCtx = null;
 let particles = [];
 let fireworkParticles = [];
 let animationId = null;
+let partyMode = false;
+let partyInterval = null;
 
 function ensureCanvas() {
   if (celebrationCanvas) return;
@@ -1448,14 +1450,42 @@ function animateCelebration() {
 
   celebrationCtx.globalAlpha = 1;
 
-  if (particles.length > 0 || fireworkParticles.length > 0) {
+  if (particles.length > 0 || fireworkParticles.length > 0 || partyMode) {
     animationId = requestAnimationFrame(animateCelebration);
   } else {
-    // Clean up
     if (celebrationCanvas) {
       celebrationCtx.clearRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
     }
   }
+}
+
+function startPartyMode() {
+  if (partyMode) return;
+  partyMode = true;
+  const w = () => window.innerWidth;
+  const h = () => window.innerHeight;
+
+  // Endless rockets every 1.2s
+  partyInterval = setInterval(() => {
+    launchRocket(w() * 0.1 + Math.random() * w() * 0.8);
+    if (Math.random() > 0.4) launchRocket(w() * 0.1 + Math.random() * w() * 0.8);
+  }, 1200);
+
+  // Confetti bursts from random edges every 2s
+  setInterval(() => {
+    if (!partyMode) return;
+    const side = Math.floor(Math.random() * 4);
+    if (side === 0) createConfetti(Math.random() * w(), 0, 40);
+    else if (side === 1) createConfetti(w(), Math.random() * h(), 40);
+    else if (side === 2) createConfetti(Math.random() * w(), h(), 40);
+    else createConfetti(0, Math.random() * h(), 40);
+  }, 2000);
+
+  // Emoji rain every 800ms
+  setInterval(() => {
+    if (!partyMode) return;
+    spawnFloatingEmoji(Math.random() * w(), h() * 0.2 + Math.random() * h() * 0.5);
+  }, 800);
 }
 
 function startCelebrationLoop() {
@@ -1531,6 +1561,9 @@ function launchFireworks(e) {
   setTimeout(() => {
     createConfetti(w / 2, 0, 120);
   }, 2800);
+
+  // After the initial show, keep the party going forever
+  setTimeout(() => startPartyMode(), 3500);
 
   startCelebrationLoop();
 }
