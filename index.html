@@ -69,7 +69,7 @@
       max-width: 800px;
       margin: 0 auto;
       display: flex;
-      align-items: baseline;
+      align-items: center;
       gap: 12px;
       padding-bottom: 16px;
     }
@@ -90,6 +90,37 @@
       font-size: 0.75rem;
       color: rgba(255,255,255,0.35);
       font-weight: 400;
+    }
+
+    .header-right {
+      margin-left: auto;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 150ms ease;
+    }
+
+    .dl-btn:hover {
+      background: rgba(255,255,255,0.14);
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .dl-btn svg {
+      width: 13px;
+      height: 13px;
     }
 
     /* ── Step Nav ── */
@@ -588,6 +619,14 @@
     <div class="header-inner">
       <div class="logo"><span class="logo-accent">Ruta Cliente 2026</span> — AquaChile</div>
       <span class="logo-sub">by brinca.com</span>
+      <div class="header-right">
+        <a class="dl-btn" href="resumen_memoria.md" download>
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2v9M4.5 7.5 8 11l3.5-3.5M3 13h10"/>
+          </svg>
+          Archivo .md
+        </a>
+      </div>
     </div>
   </header>
 
@@ -608,7 +647,7 @@ const STEPS = [
     title: "Context",
     subtitle: "Set up your AI co-creator",
     duration: null,
-    tip: { type: "action", text: "Attach the company .md file to your first message in Copilot." },
+    tip: { type: "action", text: 'Attach the company .md file to your first message in Copilot. <a href="resumen_memoria.md" download style="color:inherit;font-weight:700;text-decoration:underline;">Download it here</a>.' },
     paths: null,
     fields: [
       { id: "name", label: "Your name", placeholder: "e.g., Maria Gonzalez", multiline: false },
