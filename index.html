@@ -617,40 +617,104 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 14px 32px;
+      padding: 16px 40px;
       background: #ffffff;
       color: var(--primary);
       font-family: inherit;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 700;
       border: none;
-      border-radius: var(--radius);
+      border-radius: 50px;
       cursor: pointer;
       text-decoration: none;
-      transition: all 150ms ease;
+      transition: all 200ms ease;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .submit-cta-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255,118,0,0.15), transparent);
+      transform: skewX(-20deg);
+      animation: btn-shimmer 2.5s ease-in-out infinite;
+    }
+
+    @keyframes btn-shimmer {
+      0% { left: -60%; }
+      100% { left: 160%; }
     }
 
     .submit-cta-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      background: #fff8f2;
+      transform: scale(1.05);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+      background: #fffaf5;
+    }
+
+    .submit-cta-btn:active {
+      transform: scale(0.97);
     }
 
     .submit-cta-btn svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
 
     @keyframes pulse-ring {
-      0% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0.4); }
-      70% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 10px rgba(255, 118, 0, 0); }
+      0% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0.5); }
+      70% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 14px rgba(255, 118, 0, 0); }
       100% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0); }
     }
 
     .submit-cta {
-      animation: pulse-ring 2.5s ease-out infinite;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    /* ── Celebration Canvas ── */
+    #celebration-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Floating Emojis ── */
+    .emoji-float {
+      position: fixed;
+      font-size: 2rem;
+      pointer-events: none;
+      z-index: 9998;
+      animation: emoji-rise 3s ease-out forwards;
+    }
+
+    @keyframes emoji-rise {
+      0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
+      20% { opacity: 1; transform: translateY(-60px) scale(1.2) rotate(20deg); }
+      100% { opacity: 0; transform: translateY(-400px) scale(0.8) rotate(40deg); }
+    }
+
+    /* ── Screen flash ── */
+    .screen-flash {
+      position: fixed;
+      inset: 0;
+      background: white;
+      z-index: 10000;
+      pointer-events: none;
+      animation: flash-out 0.6s ease-out forwards;
+    }
+
+    @keyframes flash-out {
+      0% { opacity: 0.7; }
+      100% { opacity: 0; }
     }
 
     /* ── Fade transition ── */
@@ -1021,15 +1085,11 @@ function render() {
 
   // Submit CTA (final step only)
   if (step.submitUrl) {
-    html += `<div class="submit-cta">
+    html += `<div class="submit-cta" id="submit-cta">
       <div class="submit-cta-label">Final Step</div>
       <div class="submit-cta-title">Submit your idea to Ruta de Innovaci\u00f3n 2026</div>
       <div class="submit-cta-desc">Copy Copilot's output and paste it into the submission form.</div>
-      <a class="submit-cta-btn" href="${step.submitUrl}" target="_blank" rel="noopener">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 10V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5"/>
-          <path d="m11 13 3 3 5-5"/>
-        </svg>
+      <a class="submit-cta-btn" id="submit-btn" href="${step.submitUrl}" target="_blank" rel="noopener" onclick="launchFireworks(event)">
         Open Submission Form
       </a>
     </div>`;
@@ -1178,6 +1238,311 @@ async function copyPrompt() {
     document.body.removeChild(textarea);
   }
 }
+
+// ── Celebration Engine ──
+
+const CONFETTI_COLORS = ['#FF7600', '#FFa040', '#FFcc33', '#65bd7d', '#198fd9', '#ff4d6a', '#a855f7', '#ffffff'];
+const CELEBRATION_EMOJIS = ['🎉', '🚀', '🏆', '⭐', '🎊', '💡', '🔥', '✨', '🥇', '💪'];
+
+let celebrationCanvas = null;
+let celebrationCtx = null;
+let particles = [];
+let fireworkParticles = [];
+let animationId = null;
+
+function ensureCanvas() {
+  if (celebrationCanvas) return;
+  celebrationCanvas = document.createElement('canvas');
+  celebrationCanvas.id = 'celebration-canvas';
+  document.body.appendChild(celebrationCanvas);
+  celebrationCtx = celebrationCanvas.getContext('2d');
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+}
+
+function resizeCanvas() {
+  if (!celebrationCanvas) return;
+  celebrationCanvas.width = window.innerWidth;
+  celebrationCanvas.height = window.innerHeight;
+}
+
+// Confetti particle
+function createConfetti(x, y, count) {
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5);
+    const velocity = 4 + Math.random() * 8;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * velocity * (0.5 + Math.random()),
+      vy: Math.sin(angle) * velocity * (0.5 + Math.random()) - 3,
+      w: 4 + Math.random() * 6,
+      h: 6 + Math.random() * 8,
+      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+      rotation: Math.random() * 360,
+      rotSpeed: (Math.random() - 0.5) * 12,
+      gravity: 0.12 + Math.random() * 0.08,
+      drag: 0.98,
+      opacity: 1,
+      life: 160 + Math.random() * 80,
+      age: 0,
+      type: Math.random() > 0.3 ? 'rect' : 'circle'
+    });
+  }
+}
+
+// Firework burst
+function createFirework(x, y) {
+  const color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+  const sparkCount = 50 + Math.floor(Math.random() * 40);
+  for (let i = 0; i < sparkCount; i++) {
+    const angle = (Math.PI * 2 * i) / sparkCount + (Math.random() - 0.5) * 0.3;
+    const velocity = 2 + Math.random() * 5;
+    fireworkParticles.push({
+      x, y,
+      vx: Math.cos(angle) * velocity,
+      vy: Math.sin(angle) * velocity,
+      radius: 1.5 + Math.random() * 2,
+      color,
+      opacity: 1,
+      life: 50 + Math.random() * 40,
+      age: 0,
+      gravity: 0.04,
+      trail: []
+    });
+  }
+}
+
+// Rocket that goes up then bursts
+function launchRocket(x) {
+  const targetY = 80 + Math.random() * (window.innerHeight * 0.3);
+  fireworkParticles.push({
+    x, y: window.innerHeight + 10,
+    vx: (Math.random() - 0.5) * 1.5,
+    vy: -(8 + Math.random() * 4),
+    radius: 3,
+    color: '#FFcc33',
+    opacity: 1,
+    life: 999,
+    age: 0,
+    gravity: 0.04,
+    isRocket: true,
+    targetY,
+    trail: []
+  });
+}
+
+function spawnFloatingEmoji(x, y) {
+  const emoji = document.createElement('div');
+  emoji.className = 'emoji-float';
+  emoji.textContent = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
+  emoji.style.left = (x + (Math.random() - 0.5) * 200) + 'px';
+  emoji.style.top = y + 'px';
+  emoji.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
+  document.body.appendChild(emoji);
+  setTimeout(() => emoji.remove(), 3000);
+}
+
+function flashScreen() {
+  const flash = document.createElement('div');
+  flash.className = 'screen-flash';
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 600);
+}
+
+function animateCelebration() {
+  if (!celebrationCtx) return;
+  celebrationCtx.clearRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
+
+  // Draw confetti
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.age++;
+    p.vx *= p.drag;
+    p.vy += p.gravity;
+    p.vy *= 0.995;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.rotation += p.rotSpeed;
+    if (p.age > p.life * 0.7) p.opacity = Math.max(0, 1 - (p.age - p.life * 0.7) / (p.life * 0.3));
+    if (p.age > p.life) { particles.splice(i, 1); continue; }
+
+    celebrationCtx.save();
+    celebrationCtx.translate(p.x, p.y);
+    celebrationCtx.rotate(p.rotation * Math.PI / 180);
+    celebrationCtx.globalAlpha = p.opacity;
+    celebrationCtx.fillStyle = p.color;
+    if (p.type === 'circle') {
+      celebrationCtx.beginPath();
+      celebrationCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+      celebrationCtx.fill();
+    } else {
+      celebrationCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+    }
+    celebrationCtx.restore();
+  }
+
+  // Draw firework sparks
+  for (let i = fireworkParticles.length - 1; i >= 0; i--) {
+    const p = fireworkParticles[i];
+    p.age++;
+    p.vy += p.gravity;
+    p.x += p.vx;
+    p.y += p.vy;
+
+    // Rocket logic
+    if (p.isRocket) {
+      // Trail
+      celebrationCtx.beginPath();
+      celebrationCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      celebrationCtx.fillStyle = p.color;
+      celebrationCtx.globalAlpha = 1;
+      celebrationCtx.fill();
+      // Rocket trail sparks
+      for (let t = 0; t < 2; t++) {
+        particles.push({
+          x: p.x + (Math.random() - 0.5) * 4,
+          y: p.y,
+          vx: (Math.random() - 0.5) * 1,
+          vy: 1 + Math.random() * 2,
+          w: 2, h: 2,
+          color: Math.random() > 0.5 ? '#FFcc33' : '#FF7600',
+          rotation: 0, rotSpeed: 0,
+          gravity: 0.02, drag: 0.97,
+          opacity: 1, life: 20 + Math.random() * 15, age: 0,
+          type: 'circle'
+        });
+      }
+      if (p.y <= p.targetY) {
+        createFirework(p.x, p.y);
+        fireworkParticles.splice(i, 1);
+      }
+      continue;
+    }
+
+    // Trail
+    p.trail.push({ x: p.x, y: p.y });
+    if (p.trail.length > 6) p.trail.shift();
+
+    if (p.age > p.life * 0.5) p.opacity = Math.max(0, 1 - (p.age - p.life * 0.5) / (p.life * 0.5));
+    if (p.age > p.life) { fireworkParticles.splice(i, 1); continue; }
+
+    // Draw trail
+    if (p.trail.length > 1) {
+      celebrationCtx.beginPath();
+      celebrationCtx.moveTo(p.trail[0].x, p.trail[0].y);
+      for (let t = 1; t < p.trail.length; t++) {
+        celebrationCtx.lineTo(p.trail[t].x, p.trail[t].y);
+      }
+      celebrationCtx.strokeStyle = p.color;
+      celebrationCtx.globalAlpha = p.opacity * 0.3;
+      celebrationCtx.lineWidth = p.radius * 0.8;
+      celebrationCtx.stroke();
+    }
+
+    celebrationCtx.beginPath();
+    celebrationCtx.arc(p.x, p.y, p.radius * (0.5 + p.opacity * 0.5), 0, Math.PI * 2);
+    celebrationCtx.fillStyle = p.color;
+    celebrationCtx.globalAlpha = p.opacity;
+    celebrationCtx.fill();
+  }
+
+  celebrationCtx.globalAlpha = 1;
+
+  if (particles.length > 0 || fireworkParticles.length > 0) {
+    animationId = requestAnimationFrame(animateCelebration);
+  } else {
+    // Clean up
+    if (celebrationCanvas) {
+      celebrationCtx.clearRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
+    }
+  }
+}
+
+function startCelebrationLoop() {
+  if (animationId) cancelAnimationFrame(animationId);
+  animationId = requestAnimationFrame(animateCelebration);
+}
+
+// Confetti burst when step 7 loads
+function celebrateStepLoad() {
+  ensureCanvas();
+  const cta = document.getElementById('submit-cta');
+  if (!cta) return;
+  const rect = cta.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  // Staggered confetti bursts
+  createConfetti(cx, cy, 60);
+  setTimeout(() => createConfetti(cx - 100, cy - 20, 30), 200);
+  setTimeout(() => createConfetti(cx + 100, cy - 20, 30), 400);
+
+  // Floating emojis
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => spawnFloatingEmoji(cx, cy), i * 150);
+  }
+
+  startCelebrationLoop();
+}
+
+// Full fireworks show on submit click
+function launchFireworks(e) {
+  ensureCanvas();
+  flashScreen();
+
+  const w = window.innerWidth;
+
+  // Wave 1: immediate burst from click position
+  const rect = e.target.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  createConfetti(cx, cy, 100);
+
+  // Floating emojis rain
+  for (let i = 0; i < 15; i++) {
+    setTimeout(() => {
+      spawnFloatingEmoji(
+        Math.random() * w,
+        window.innerHeight * 0.3 + Math.random() * window.innerHeight * 0.4
+      );
+    }, i * 200);
+  }
+
+  // Wave 2: rockets from bottom
+  for (let i = 0; i < 5; i++) {
+    setTimeout(() => {
+      launchRocket(w * 0.15 + Math.random() * w * 0.7);
+    }, 300 + i * 400);
+  }
+
+  // Wave 3: more rockets
+  for (let i = 0; i < 4; i++) {
+    setTimeout(() => {
+      launchRocket(w * 0.1 + Math.random() * w * 0.8);
+    }, 2200 + i * 350);
+  }
+
+  // Wave 4: confetti cannons from sides
+  setTimeout(() => {
+    createConfetti(0, window.innerHeight * 0.4, 80);
+    createConfetti(w, window.innerHeight * 0.4, 80);
+  }, 1500);
+
+  setTimeout(() => {
+    createConfetti(w / 2, 0, 120);
+  }, 2800);
+
+  startCelebrationLoop();
+}
+
+// Hook into step rendering to trigger confetti on step 7
+const originalRender = render;
+render = function() {
+  originalRender();
+  if (STEPS[currentStep]?.submitUrl) {
+    setTimeout(celebrateStepLoad, 400);
+  }
+};
 
 // ── Init ──
 render();
