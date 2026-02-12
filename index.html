@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovation Workshop — Copilot Prompt Guide</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f7f8;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-2: #475569;
+      --text-3: #94a3b8;
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --primary-dark: #3730a3;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --amber-border: #fcd34d;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --rose: #e11d48;
+      --rose-light: #fff1f2;
+      --border: #e2e8f0;
+      --radius: 10px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      display: block;
+      height: 3px;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #0f172a;
+      padding: 20px 24px 0;
+      position: sticky;
+      top: 3px;
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding-bottom: 16px;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-sub {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 400;
+    }
+
+    /* ── Step Nav ── */
+    .step-nav {
+      background: #0f172a;
+      padding: 0 24px 16px;
+      position: sticky;
+      top: 3px;
+      z-index: 50;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .step-nav::-webkit-scrollbar { display: none; }
+
+    .step-nav-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      gap: 6px;
+    }
+
+    .step-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      font-family: inherit;
+      transition: all 150ms ease;
+    }
+
+    .step-pill:hover {
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .step-pill.active {
+      background: #ffffff;
+      color: #0f172a;
+      border-color: #ffffff;
+      font-weight: 600;
+    }
+
+    .step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    .step-pill.active .step-num {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .step-pill.completed .step-num::after {
+      content: '\2713';
+    }
+
+    .step-label { display: none; }
+
+    @media (min-width: 768px) {
+      .step-label { display: inline; }
+    }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    /* ── Step Header ── */
+    .step-header {
+      margin-bottom: 24px;
+    }
+
+    .step-header-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .step-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .step-duration {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-3);
+      background: var(--bg);
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .step-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .step-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      margin-top: 2px;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .callout-tip {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid #c7d2fe;
+    }
+
+    .callout-action {
+      background: var(--amber-light);
+      color: #92400e;
+      border: 1px solid var(--amber-border);
+    }
+
+    .callout-human {
+      background: var(--rose-light);
+      color: #9f1239;
+      border: 1px solid #fecdd3;
+    }
+
+    .callout strong {
+      font-weight: 600;
+    }
+
+    /* ── Path Toggle ── */
+    .path-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .path-btn {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: all 150ms ease;
+      line-height: 1.4;
+    }
+
+    .path-btn:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .path-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    /* ── Fields Section ── */
+    .fields-section {
+      background: var(--amber-light);
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .fields-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--amber);
+      margin-bottom: 14px;
+    }
+
+    .field-group {
+      margin-bottom: 14px;
+    }
+
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .field-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #92400e;
+      margin-bottom: 4px;
+    }
+
+    .field-input,
+    .field-textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--amber-border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: #ffffff;
+      transition: border-color 150ms ease;
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      outline: none;
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+    }
+
+    .field-textarea {
+      min-height: 64px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .field-input::placeholder,
+    .field-textarea::placeholder {
+      color: #d4a06a;
+    }
+
+    /* ── Prompt Card ── */
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 2px var(--radius) var(--radius) 2px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .prompt-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prompt-card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-3);
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--text-2);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary-light);
+      border-color: #c7d2fe;
+      color: var(--primary);
+    }
+
+    .copy-btn.copied {
+      background: var(--green-light);
+      border-color: #a7f3d0;
+      color: var(--green);
+    }
+
+    .copy-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .prompt-text {
+      padding: 20px;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .prompt-text .field-highlight {
+      background: var(--amber-light);
+      color: #92400e;
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid var(--amber-border);
+      font-weight: 500;
+    }
+
+    /* ── Nav Buttons ── */
+    .step-nav-btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 28px;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text-2);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .nav-btn:hover {
+      background: var(--bg);
+      border-color: #cbd5e1;
+    }
+
+    .nav-btn-next {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      margin-left: auto;
+    }
+
+    .nav-btn-next:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* ── Challenge Reference ── */
+    .challenge-ref {
+      margin-bottom: 20px;
+    }
+
+    .challenge-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text-2);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .challenge-toggle:hover {
+      background: var(--bg);
+    }
+
+    .challenge-toggle .arrow {
+      transition: transform 200ms ease;
+      font-size: 0.7rem;
+    }
+
+    .challenge-toggle.open .arrow {
+      transform: rotate(90deg);
+    }
+
+    .challenge-panel {
+      display: none;
+      margin-top: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .challenge-panel.open {
+      display: block;
+    }
+
+    .challenge-pillar {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .challenge-pillar:last-child {
+      border-bottom: none;
+    }
+
+    .pillar-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 10px 16px;
+      background: #f8fafc;
+      color: var(--text-2);
+    }
+
+    .challenge-item {
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      color: var(--text-2);
+      border-top: 1px solid #f1f5f9;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: background 100ms ease;
+    }
+
+    .challenge-item:hover {
+      background: var(--primary-light);
+    }
+
+    .challenge-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Fade transition ── */
+    .fade-in {
+      animation: fadeIn 200ms ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      main { padding: 20px 16px 80px; }
+      .step-title { font-size: 1.3rem; }
+      .path-toggle { flex-direction: column; }
+      .prompt-text { padding: 16px; font-size: 0.85rem; }
+      .fields-section { padding: 16px; }
+      .header-inner { padding-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">Innovation Workshop</div>
+      <span class="logo-sub">Copilot Prompt Guide</span>
+    </div>
+  </header>
+
+  <nav class="step-nav">
+    <div class="step-nav-inner" id="step-nav"></div>
+  </nav>
+
+  <main>
+    <div id="step-content"></div>
+  </main>
+
+<script>
+// ── Data ──
+
+const STEPS = [
+  {
+    id: 1,
+    title: "Context",
+    subtitle: "Set up your AI co-creator",
+    duration: null,
+    tip: { type: "action", text: "Attach the company .md file to your first message in Copilot." },
+    paths: null,
+    fields: [
+      { id: "name", label: "Your name", placeholder: "e.g., Maria Gonzalez", multiline: false },
+      { id: "role", label: "Your role, department & key details", placeholder: "e.g., Sales Coordinator in the Commercial team, based in Miami, responsible for US East Coast clients", multiline: true }
+    ],
+    prompt: `You are an Expert in Innovation and Aquaculture.
+
+I am {{name}} and I work as {{role}}.
+
+I'm participating in the Advanced Ideation Workshop 'Innovation Route 2026' at AquaChile, our internal innovation program.
+
+Your goal is to help me generate a high-impact innovation idea for the company (one that can impact EBITDA).
+
+As context, I'm attaching this .md file with important information about our company.
+
+I want us to move step by step and for you not to jump ahead with suggestions — we'll co-create together. Our first step is to dive deeper into a challenge and problem I've identified.`,
+    fieldFallbacks: {
+      name: "your name",
+      role: "your role, department, and key details about what you do"
+    }
+  },
+  {
+    id: 2,
+    title: "Challenge & Problem",
+    subtitle: "Define what you want to solve",
+    duration: "10 min",
+    tip: { type: "tip", text: "The better you define the problem, the better your solution will be. Take your time here." },
+    challengeRef: true,
+    paths: [
+      {
+        id: "a",
+        label: "I already know my problem",
+        fields: [
+          { id: "challenge2a", label: "The challenge you chose", placeholder: "e.g., Challenge #5: Inventory Management — How might we standardize...", multiline: true },
+          { id: "problem", label: "The problem or opportunity you see", placeholder: "e.g., Currently each branch manages frozen inventory with different spreadsheets, causing stock discrepancies and lost sales...", multiline: true }
+        ],
+        prompt: `The challenge I'd like to tackle is: {{challenge2a}}.
+
+Also, I already know a specific problem within this challenge that interests me. It's about {{problem}}.
+
+Ask me good questions to dive deeper into this problem based on my experience and knowledge. Ask me 3–5 good questions to start and then let's keep talking!`,
+        fieldFallbacks: {
+          challenge2a: "the Innovation Route challenge you want to address",
+          problem: "the problem or opportunity you see"
+        }
+      },
+      {
+        id: "b",
+        label: "Help me find a problem",
+        fields: [
+          { id: "challenge2b", label: "The challenge you chose", placeholder: "e.g., Challenge #5: Inventory Management — How might we standardize...", multiline: true }
+        ],
+        prompt: `The challenge I'd like to tackle is: {{challenge2b}}.
+
+I find this challenge interesting, but I haven't yet identified a specific problem or opportunity.
+
+Ask me good questions to identify a specific problem or opportunity within this challenge, based on my experience and knowledge. Ask me 3–5 good questions to start and then let's keep talking!`,
+        fieldFallbacks: {
+          challenge2b: "the Innovation Route challenge you want to address"
+        }
+      }
+    ],
+    fields: null,
+    prompt: null,
+    fieldFallbacks: null
+  },
+  {
+    id: 3,
+    title: "Solution",
+    subtitle: "Co-design your innovation idea",
+    duration: "10 min",
+    tip: { type: "tip", text: "It's OK if your idea is rough. Copilot will help you refine it." },
+    paths: [
+      {
+        id: "a",
+        label: "I already have an idea",
+        fields: [
+          { id: "idea", label: "Your preliminary idea", placeholder: "e.g., A centralized real-time inventory dashboard that connects all branches via a single API...", multiline: true }
+        ],
+        prompt: `Now that we better understand the problem, let's think about how to solve it in a way that creates a positive impact for stakeholders and contributes to the company's EBITDA.
+
+I already have a preliminary solution idea! It's about {{idea}}.
+
+Ask me good questions to go deeper into this idea. I want us to use it as a starting point to reach the best possible solution.`,
+        fieldFallbacks: {
+          idea: "the idea you have so far"
+        }
+      },
+      {
+        id: "b",
+        label: "I need help brainstorming",
+        fields: [],
+        prompt: `Now that we better understand the problem, let's think about how to solve it in a way that creates a positive impact for stakeholders and contributes to the company's EBITDA.
+
+I don't have a clear idea yet of how to solve this problem or opportunity.
+
+Help me brainstorm different ways to solve the problem together.`,
+        fieldFallbacks: {}
+      }
+    ],
+    fields: null,
+    prompt: null,
+    fieldFallbacks: null
+  },
+  {
+    id: 4,
+    title: "Iterate with Feedback",
+    subtitle: "Integrate your colleague's input",
+    duration: "5 min",
+    tip: { type: "human", text: "Before using this prompt: share your idea with a colleague (7 min each). Bring their best feedback here." },
+    paths: null,
+    fields: [
+      { id: "feedback", label: "Your colleague's feedback (the points that resonated most)", placeholder: "e.g., She suggested focusing on frozen products first since that's where most discrepancies happen. Also recommended integrating with the existing SAP system rather than building from scratch...", multiline: true }
+    ],
+    prompt: `I just met with a colleague who gave me excellent feedback. Here's what they said:
+
+{{feedback}}
+
+Your Task:
+- Analyze how this feedback changes or improves the original solution.
+- Propose how to integrate this suggestion without losing technical feasibility.
+- Ask me: 'Does this new version fit your solution, or do you want to keep iterating?'`,
+    fieldFallbacks: {
+      feedback: "WRITE HERE THE FEEDBACK POINTS THAT RESONATED MOST WITH YOU"
+    }
+  },
+  {
+    id: 5,
+    title: "Impact & Benefits",
+    subtitle: "Build the economic case",
+    duration: "10 min",
+    tip: { type: "tip", text: "Copilot will think like a CFO. No made-up numbers — just economic logic you can defend." },
+    paths: null,
+    fields: [],
+    prompt: `Now act as AquaChile's CFO: with a business vision, focused on profitability and also on risk management.
+
+I want you to help me understand the potential impact of my idea because I'll need to defend the investment by demonstrating its return. Don't give me made-up numbers. Help me build the economic logic.
+
+- EBITDA Connection: Analyze my solution and explain step by step how this improvement impacts the Income Statement.
+- Key Data: Think about and list the key data I need to gather to validate the EBITDA impact of my idea.
+- Profitability Booster: Give me advice — what small modification could I make to my idea to increase its EBITDA impact even further?`,
+    fieldFallbacks: {}
+  },
+  {
+    id: 6,
+    title: "Resources",
+    subtitle: "What do you need to make it happen?",
+    duration: "5 min",
+    tip: { type: "tip", text: "Think about hidden costs: training, change management, maintenance, integrations." },
+    paths: null,
+    fields: [],
+    prompt: `Act as a Senior Project Implementation Manager.
+
+YOUR TASK: Your goal is to break down the real "Shopping List" to make this project work, ensuring I don't miss any hidden costs or resources.
+
+INSTRUCTIONS:
+- Analyze my solution: Identify if it requires Hardware, Software, People, Training, or Infrastructure Changes.
+- The Interrogation: Don't ask me generic questions. Based on my specific idea, ask me 3 good questions about resources I probably didn't consider.`,
+    fieldFallbacks: {}
+  },
+  {
+    id: 7,
+    title: "Final Compilation",
+    subtitle: "Get your submission-ready summary",
+    duration: "5 min",
+    tip: { type: "action", text: "This is the last prompt. It compiles everything for the Innovation Route submission form." },
+    paths: null,
+    fields: [],
+    prompt: `Now act as an Expert in Innovation Project Formulation.
+
+During this session we've defined my root problem, my technical solution, the required resources, and the impact estimate.
+
+Please compile all the information from our conversation and draft the final answers for the form we'll use to submit our idea. Use executive, persuasive, and direct language.
+
+COMPLETE THESE FIELDS (and suggest a title):
+- CHALLENGE & PROBLEM: Summarize — What problem did you observe? Where does it occur? And why is it critical to solve?
+- DESCRIBE YOUR IDEA: Explain simply — What is it? And how does it work technically?
+- IMPACT & BENEFITS: Write the value logic. How does it generate value for AquaChile?
+- RESOURCES & EFFORT: List what's needed (People, time, equipment) and the estimated cost level.`,
+    fieldFallbacks: {}
+  }
+];
+
+const CHALLENGES = [
+  {
+    pillar: "Process Efficiency & Productivity",
+    items: [
+      { num: 1, title: "Processes", hmw: "How might we redesign the way we work to achieve the highest excellence in our processes, continue growing, and add value to our clients?" },
+      { num: 2, title: "Land Traceability", hmw: "How might we gain visibility and optimize the logistics flow between the airport, the warehouses, and the branch?" },
+      { num: 3, title: "Product Quality", hmw: "How might we optimize operational coordination (logistics-production) to guarantee product integrity in strategic markets — focusing on airport reception, transfer to the branch, and dispatch to clients?" }
+    ]
+  },
+  {
+    pillar: "Digital Transformation: Data & Automation",
+    items: [
+      { num: 4, title: "Data-Driven Decisions", hmw: "How might we enhance our capabilities through the use of technology and data to make smarter and faster decisions?" },
+      { num: 5, title: "Inventory Management", hmw: "How might we standardize a single, universal inventory management system for frozen products that allows sales and operations teams to view their stock, commit sales, and validate stock status?" },
+      { num: 6, title: "Operations", hmw: "How might we automate document management and exchange in the export process to reduce dependency on manual channels and reduce errors?" }
+    ]
+  },
+  {
+    pillar: "Sustainability: Environment & Community",
+    items: [
+      { num: 7, title: "Positioning", hmw: "How might we position our brand globally, leveraging our track record and high standards in animal care and environmental stewardship?" },
+      { num: 8, title: "Sustainable Value", hmw: "How might we integrate sustainability attributes into our brand strategy so that customers prefer our products?" }
+    ]
+  },
+  {
+    pillar: "People First: Employees, Clients & Suppliers",
+    items: [
+      { num: 9, title: "People First", hmw: "How might we ensure that AquaChile is the most trusted company in the market, taking care of our people and putting our clients at the center?" },
+      { num: 10, title: "Brand Differentiation", hmw: "How might we elevate the perceived value of our brands (Aqua Singular, Verlasso) in global markets to increase customer preference?" },
+      { num: 11, title: "Market Loyalty", hmw: "How might we design differentiated services and value propositions by customer segment that maximize loyalty and business impact, even under adverse market conditions?" }
+    ]
+  }
+];
+
+const SHORT_TITLES = ["Context", "Challenge", "Solution", "Iterate", "Impact", "Resources", "Summary"];
+
+// ── State ──
+let currentStep = 0;
+let activePaths = { 2: "a", 3: "a" };
+let fieldValues = {};
+let challengePanelOpen = false;
+
+// ── Render ──
+
+function renderNav() {
+  const nav = document.getElementById('step-nav');
+  nav.innerHTML = STEPS.map((step, i) => `
+    <button class="step-pill ${i === currentStep ? 'active' : ''}" onclick="goToStep(${i})">
+      <span class="step-num">${step.id}</span>
+      <span class="step-label">${SHORT_TITLES[i]}</span>
+    </button>
+  `).join('');
+}
+
+function render() {
+  renderNav();
+  const container = document.getElementById('step-content');
+  const step = STEPS[currentStep];
+  const isPathStep = step.paths !== null;
+  const activePath = isPathStep ? step.paths.find(p => p.id === activePaths[step.id]) : null;
+
+  const fields = isPathStep ? (activePath?.fields || []) : (step.fields || []);
+  const promptTemplate = isPathStep ? activePath?.prompt : step.prompt;
+  const fallbacks = isPathStep ? (activePath?.fieldFallbacks || {}) : (step.fieldFallbacks || {});
+
+  let html = '<div class="fade-in">';
+
+  // Step header
+  html += `<div class="step-header">
+    <div class="step-header-top">
+      <span class="step-number">Step ${step.id}</span>
+      ${step.duration ? `<span class="step-duration">${step.duration}</span>` : ''}
+    </div>
+    <h1 class="step-title">${step.title}</h1>
+    <p class="step-subtitle">${step.subtitle}</p>
+  </div>`;
+
+  // Callout / tip
+  if (step.tip) {
+    html += `<div class="callout callout-${step.tip.type}">
+      <strong>${step.tip.type === 'tip' ? 'Tip' : step.tip.type === 'action' ? 'Important' : 'Human step first'}:</strong> ${step.tip.text}
+    </div>`;
+  }
+
+  // Challenge reference (step 2)
+  if (step.challengeRef) {
+    html += renderChallengeRef();
+  }
+
+  // Path toggle
+  if (isPathStep) {
+    html += `<div class="path-toggle">
+      ${step.paths.map(p => `
+        <button class="path-btn ${activePaths[step.id] === p.id ? 'active' : ''}"
+                onclick="togglePath(${step.id}, '${p.id}')">
+          ${p.label}
+        </button>
+      `).join('')}
+    </div>`;
+  }
+
+  // Fields section
+  if (fields.length > 0) {
+    html += `<div class="fields-section">
+      <div class="fields-title">Fill in your details</div>
+      ${fields.map(f => `
+        <div class="field-group">
+          <label class="field-label" for="field-${f.id}">${f.label}</label>
+          ${f.multiline
+            ? `<textarea class="field-textarea" id="field-${f.id}" placeholder="${f.placeholder}" oninput="onFieldInput('${f.id}', this.value)">${fieldValues[f.id] || ''}</textarea>`
+            : `<input class="field-input" type="text" id="field-${f.id}" placeholder="${f.placeholder}" value="${fieldValues[f.id] || ''}" oninput="onFieldInput('${f.id}', this.value)">`
+          }
+        </div>
+      `).join('')}
+    </div>`;
+  }
+
+  // Prompt card
+  const assembledPrompt = assemblePrompt(promptTemplate, fallbacks);
+  const displayPrompt = assemblePromptHTML(promptTemplate, fallbacks);
+
+  html += `<div class="prompt-card">
+    <div class="prompt-card-header">
+      <span class="prompt-card-label">Prompt to copy into Copilot</span>
+      <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">
+        <svg id="copy-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="5" y="5" width="9" height="9" rx="1.5"/>
+          <path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/>
+        </svg>
+        <span id="copy-text">Copy</span>
+      </button>
+    </div>
+    <div class="prompt-text" id="prompt-display">${displayPrompt}</div>
+  </div>`;
+
+  // Navigation buttons
+  html += `<div class="step-nav-btns">
+    <button class="nav-btn" onclick="goToStep(${currentStep - 1})" ${currentStep === 0 ? 'disabled' : ''}>
+      ← Previous
+    </button>
+    ${currentStep < STEPS.length - 1
+      ? `<button class="nav-btn nav-btn-next" onclick="goToStep(${currentStep + 1})">Next →</button>`
+      : ''}
+  </div>`;
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function renderChallengeRef() {
+  let html = `<div class="challenge-ref">
+    <button class="challenge-toggle ${challengePanelOpen ? 'open' : ''}" onclick="toggleChallenges()">
+      <span class="arrow">▶</span> View the 11 challenges
+    </button>
+    <div class="challenge-panel ${challengePanelOpen ? 'open' : ''}">`;
+
+  CHALLENGES.forEach(pillar => {
+    html += `<div class="challenge-pillar">
+      <div class="pillar-name">${pillar.pillar}</div>
+      ${pillar.items.map(c => `
+        <div class="challenge-item" onclick="pickChallenge(${c.num}, '${c.title}', this)">
+          <strong>#${c.num} ${c.title}:</strong> ${c.hmw}
+        </div>
+      `).join('')}
+    </div>`;
+  });
+
+  html += `</div></div>`;
+  return html;
+}
+
+function assemblePrompt(template, fallbacks) {
+  if (!template) return '';
+  return template.replace(/\{\{(\w+)\}\}/g, (match, id) => {
+    const value = fieldValues[id]?.trim();
+    return value || `[${fallbacks[id] || id}]`;
+  });
+}
+
+function assemblePromptHTML(template, fallbacks) {
+  if (!template) return '';
+  const escaped = template
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  return escaped.replace(/\{\{(\w+)\}\}/g, (match, id) => {
+    const value = fieldValues[id]?.trim();
+    if (value) {
+      return `<span class="field-highlight">${value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>`;
+    }
+    return `<span class="field-highlight">[${fallbacks[id] || id}]</span>`;
+  });
+}
+
+// ── Actions ──
+
+function goToStep(index) {
+  if (index < 0 || index >= STEPS.length) return;
+  currentStep = index;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function togglePath(stepId, pathId) {
+  activePaths[stepId] = pathId;
+  render();
+}
+
+function onFieldInput(fieldId, value) {
+  fieldValues[fieldId] = value;
+  // Live-update prompt display without full re-render
+  const step = STEPS[currentStep];
+  const isPathStep = step.paths !== null;
+  const activePath = isPathStep ? step.paths.find(p => p.id === activePaths[step.id]) : null;
+  const template = isPathStep ? activePath?.prompt : step.prompt;
+  const fallbacks = isPathStep ? (activePath?.fieldFallbacks || {}) : (step.fieldFallbacks || {});
+  const display = document.getElementById('prompt-display');
+  if (display && template) {
+    display.innerHTML = assemblePromptHTML(template, fallbacks);
+  }
+}
+
+function toggleChallenges() {
+  challengePanelOpen = !challengePanelOpen;
+  const toggle = document.querySelector('.challenge-toggle');
+  const panel = document.querySelector('.challenge-panel');
+  if (toggle) toggle.classList.toggle('open');
+  if (panel) panel.classList.toggle('open');
+}
+
+function pickChallenge(num, title, el) {
+  const step = STEPS[currentStep];
+  const pathId = activePaths[step.id];
+  const fieldId = pathId === 'a' ? 'challenge2a' : 'challenge2b';
+  const challenge = CHALLENGES.flatMap(p => p.items).find(c => c.num === num);
+  const text = `Challenge #${num}: ${title} — ${challenge.hmw}`;
+  fieldValues[fieldId] = text;
+  const input = document.getElementById(`field-${fieldId}`);
+  if (input) input.value = text;
+  onFieldInput(fieldId, text);
+  challengePanelOpen = false;
+  render();
+}
+
+async function copyPrompt() {
+  const step = STEPS[currentStep];
+  const isPathStep = step.paths !== null;
+  const activePath = isPathStep ? step.paths.find(p => p.id === activePaths[step.id]) : null;
+  const template = isPathStep ? activePath?.prompt : step.prompt;
+  const fallbacks = isPathStep ? (activePath?.fieldFallbacks || {}) : (step.fieldFallbacks || {});
+  const text = assemblePrompt(template, fallbacks);
+
+  try {
+    await navigator.clipboard.writeText(text);
+    const btn = document.getElementById('copy-btn');
+    const icon = document.getElementById('copy-icon');
+    const label = document.getElementById('copy-text');
+    btn.classList.add('copied');
+    label.textContent = 'Copied!';
+    icon.innerHTML = '<polyline points="4 8 7 11 12 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      label.textContent = 'Copy';
+      icon.innerHTML = '<rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/>';
+    }, 2000);
+  } catch (err) {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+}
+
+// ── Init ──
+render();
+</script>
+</body>
+</html>
