@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ruta Cliente 2026 — AquaChile | Copilot Prompt Guide</title>
+  <title>Ruta de Innovacion 2026 — AquaChile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,15 +19,7 @@
       --primary: #FF7600;
       --primary-light: #FFF4EB;
       --primary-dark: #E06800;
-      --amber: #FF7600;
-      --amber-light: #FFF4EB;
       --amber-border: #FFB870;
-      --green: #65bd7d;
-      --green-light: #edf8f0;
-      --blue: #198fd9;
-      --blue-light: #e8f4fc;
-      --rose: #e11d48;
-      --rose-light: #fff1f2;
       --border: #e5e5e5;
       --radius: 6px;
       --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
@@ -56,22 +48,18 @@
       z-index: 100;
     }
 
-    /* ── Header ── */
+    /* -- Header -- */
     header {
       background: #141414;
-      padding: 20px 24px 0;
-      position: sticky;
-      top: 3px;
-      z-index: 50;
+      padding: 20px 24px;
     }
 
     .header-inner {
-      max-width: 800px;
+      max-width: 640px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding-bottom: 16px;
     }
 
     .logo {
@@ -92,1493 +80,356 @@
       font-weight: 400;
     }
 
-    /* ── Step Nav ── */
-    .step-nav {
-      background: #141414;
-      padding: 0 24px 16px;
-      position: sticky;
-      top: 3px;
-      z-index: 50;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-    }
-
-    .step-nav::-webkit-scrollbar { display: none; }
-
-    .step-nav-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      gap: 6px;
-    }
-
-    .step-pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: transparent;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      white-space: nowrap;
-      font-size: 0.8rem;
-      font-family: inherit;
-      transition: all 150ms ease;
-    }
-
-    .step-pill:hover {
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.8);
-    }
-
-    .step-pill.active {
-      background: #ffffff;
-      color: var(--text);
-      border-color: #ffffff;
-      font-weight: 600;
-    }
-
-    .step-num {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: 700;
-      background: rgba(255,255,255,0.12);
-      flex-shrink: 0;
-    }
-
-    .step-pill.active .step-num {
-      background: var(--primary);
-      color: #ffffff;
-    }
-
-    .step-pill.completed .step-num::after {
-      content: '\2713';
-    }
-
-    .step-label { display: none; }
-
-    @media (min-width: 768px) {
-      .step-label { display: inline; }
-    }
-
-    /* ── Main Content ── */
+    /* -- Main -- */
     main {
-      max-width: 800px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 32px 24px 80px;
+      padding: 36px 24px 80px;
     }
 
-    /* ── Step Header ── */
-    .step-header {
-      margin-bottom: 24px;
-    }
-
-    .step-header-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 4px;
-    }
-
-    .step-number {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--primary);
-      background: var(--primary-light);
-      padding: 3px 10px;
-      border-radius: 12px;
-    }
-
-    .step-duration {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-3);
-      background: var(--bg);
-      padding: 3px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .step-title {
-      font-size: 1.6rem;
+    /* -- Title Section -- */
+    .page-title {
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: -0.03em;
       color: var(--text);
       line-height: 1.3;
-    }
-
-    .step-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-2);
-      margin-top: 2px;
-    }
-
-    /* ── Callout ── */
-    .callout {
-      padding: 12px 16px;
-      border-radius: var(--radius);
-      font-size: 0.85rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .callout-tip {
-      background: var(--blue-light);
-      color: #0d6eaa;
-      border: 1px solid #b3daf0;
-    }
-
-    .callout-action {
-      background: var(--primary-light);
-      color: #9a4500;
-      border: 1px solid var(--amber-border);
-    }
-
-    .callout-human {
-      background: var(--rose-light);
-      color: #9f1239;
-      border: 1px solid #fecdd3;
-    }
-
-    .callout strong {
-      font-weight: 600;
-    }
-
-    /* ── Path Toggle ── */
-    .path-toggle {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .path-btn {
-      flex: 1;
-      padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      cursor: pointer;
-      text-align: center;
-      font-family: inherit;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-2);
-      transition: all 150ms ease;
-      line-height: 1.4;
-    }
-
-    .path-btn:hover {
-      border-color: var(--amber-border);
-      background: var(--bg);
-    }
-
-    .path-btn.active {
-      border-color: var(--primary);
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      font-weight: 600;
-    }
-
-    /* ── Fields Section ── */
-    .fields-section {
-      background: var(--amber-light);
-      border: 1px solid var(--amber-border);
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-
-    .fields-title {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--amber);
-      margin-bottom: 14px;
-    }
-
-    .field-group {
-      margin-bottom: 14px;
-    }
-
-    .field-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .field-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--primary-dark);
       margin-bottom: 4px;
     }
 
-    .field-input,
-    .field-textarea {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid var(--amber-border);
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      color: var(--text);
-      background: #ffffff;
-      transition: border-color 150ms ease;
+    .page-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      margin-bottom: 28px;
     }
 
-    .field-input:focus,
-    .field-textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255, 118, 0, 0.1);
+    /* -- Card List -- */
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .field-textarea {
-      min-height: 64px;
-      resize: vertical;
-      line-height: 1.5;
-    }
-
-    .field-input::placeholder,
-    .field-textarea::placeholder {
-      color: #d4a06a;
-    }
-
-    /* ── Prompt Card ── */
-    .prompt-card {
+    /* -- Gerencia Card -- */
+    .gerencia-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--primary);
-      border-radius: 2px var(--radius) var(--radius) 2px;
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
+      transition: box-shadow 150ms ease;
     }
 
-    .prompt-card-header {
+    .gerencia-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .gerencia-btn {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-      background: #fafbfc;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .prompt-card-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-3);
-    }
-
-    .copy-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: var(--surface);
-      color: var(--text-2);
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 500;
+      width: 100%;
+      min-height: 60px;
+      padding: 16px 20px;
+      background: none;
+      border: none;
       cursor: pointer;
-      transition: all 150ms ease;
-    }
-
-    .copy-btn:hover {
-      background: var(--primary-light);
-      border-color: var(--amber-border);
-      color: var(--primary);
-    }
-
-    .copy-btn.copied {
-      background: var(--green-light);
-      border-color: #a7f3d0;
-      color: var(--green);
-    }
-
-    .copy-btn svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .prompt-text {
-      padding: 20px;
-      font-size: 0.9rem;
-      line-height: 1.75;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--text);
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-
-    .prompt-text .field-highlight {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      padding: 1px 6px;
-      border-radius: 3px;
-      border: 1px solid var(--amber-border);
-      font-weight: 500;
-    }
-
-    /* ── Nav Buttons ── */
-    .step-nav-btns {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 28px;
+      text-align: left;
+      text-decoration: none;
+      transition: background 100ms ease;
       gap: 12px;
     }
 
-    .nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 20px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--text-2);
-      font-family: inherit;
-      font-size: 0.85rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 150ms ease;
-    }
-
-    .nav-btn:hover {
+    .gerencia-btn:hover {
       background: var(--bg);
-      border-color: var(--text-3);
     }
 
-    .nav-btn-next {
+    a.gerencia-btn {
+      display: flex;
+    }
+
+    .gerencia-btn .label {
+      flex: 1;
+    }
+
+    /* -- Active indicator dot -- */
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
       background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-      margin-left: auto;
+      flex-shrink: 0;
     }
 
-    .nav-btn-next:hover {
-      background: var(--primary-dark);
-      border-color: var(--primary-dark);
-    }
-
-    .nav-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    /* ── Challenge Reference ── */
-    .challenge-ref {
-      margin-bottom: 20px;
-    }
-
-    .challenge-toggle {
+    /* -- Coming soon badge -- */
+    .badge-soon {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--surface);
-      color: var(--text-2);
-      font-family: inherit;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 150ms ease;
-    }
-
-    .challenge-toggle:hover {
-      background: var(--bg);
-    }
-
-    .challenge-toggle .arrow {
-      transition: transform 200ms ease;
+      padding: 3px 10px;
+      border-radius: 12px;
       font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-3);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .challenge-toggle.open .arrow {
+    /* -- Chevron -- */
+    .chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--text-3);
+      transition: transform 250ms ease;
+    }
+
+    .gerencia-card.expanded .chevron {
       transform: rotate(90deg);
     }
 
-    .challenge-panel {
-      display: none;
-      margin-top: 12px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+    /* -- Sub-area panel -- */
+    .sub-areas {
+      max-height: 0;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      transition: max-height 350ms ease;
     }
 
-    .challenge-panel.open {
-      display: block;
+    .gerencia-card.expanded .sub-areas {
+      max-height: 600px;
     }
 
-    .challenge-pillar {
-      border-bottom: 1px solid var(--border);
+    .sub-areas-inner {
+      padding: 0 0 8px 0;
+      border-top: 1px solid var(--border);
     }
 
-    .challenge-pillar:last-child {
-      border-bottom: none;
-    }
-
-    .pillar-name {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 10px 16px;
-      background: #f8fafc;
-      color: var(--text-2);
-    }
-
-    .challenge-item {
-      padding: 10px 16px;
-      font-size: 0.82rem;
-      color: var(--text-2);
-      border-top: 1px solid #f1f5f9;
-      line-height: 1.5;
-      cursor: pointer;
-      transition: background 100ms ease;
-    }
-
-    .challenge-item:hover {
-      background: var(--primary-light);
-    }
-
-    .challenge-item strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    /* ── Submit CTA ── */
-    .submit-cta {
-      margin-top: 28px;
-      background: linear-gradient(135deg, #FF7600 0%, #E06800 100%);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 1px rgba(255, 118, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .submit-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,0.03) 10px,
-        rgba(255,255,255,0.03) 20px
-      );
-    }
-
-    .submit-cta-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 8px;
-      position: relative;
-    }
-
-    .submit-cta-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-      letter-spacing: -0.02em;
-      position: relative;
-    }
-
-    .submit-cta-desc {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    .submit-cta-btn {
-      display: inline-flex;
+    /* -- Sub-area link -- */
+    .sub-area-link {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 40px;
-      background: #ffffff;
-      color: var(--primary);
-      font-family: inherit;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
+      gap: 12px;
+      padding: 12px 20px 12px 44px;
+      color: var(--text-2);
       text-decoration: none;
-      transition: all 200ms ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 100ms ease, color 100ms ease;
+      border-left: 3px solid transparent;
+      margin-left: 1px;
     }
 
-    .submit-cta-btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -60%;
-      width: 40%;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255,118,0,0.15), transparent);
-      transform: skewX(-20deg);
-      animation: btn-shimmer 2.5s ease-in-out infinite;
+    .sub-area-link:hover {
+      background: var(--bg);
+      color: var(--text);
     }
 
-    @keyframes btn-shimmer {
-      0% { left: -60%; }
-      100% { left: 160%; }
+    .sub-area-link.active {
+      border-left-color: var(--primary);
+      color: var(--text);
     }
 
-    .submit-cta-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
-      background: #fffaf5;
+    .sub-area-link .label {
+      flex: 1;
     }
 
-    .submit-cta-btn:active {
-      transform: scale(0.97);
+    .sub-area-link .status-dot {
+      width: 6px;
+      height: 6px;
     }
 
-    .submit-cta-btn svg {
-      width: 20px;
-      height: 20px;
+    .sub-area-link .badge-soon {
+      font-size: 0.65rem;
+      padding: 2px 8px;
     }
 
-    @keyframes pulse-ring {
-      0% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0.5); }
-      70% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 14px rgba(255, 118, 0, 0); }
-      100% { box-shadow: 0 4px 20px rgba(255, 118, 0, 0.3), 0 0 0 0 rgba(255, 118, 0, 0); }
-    }
-
-    .submit-cta {
-      animation: pulse-ring 2s ease-out infinite;
-    }
-
-    /* ── Celebration Canvas ── */
-    #celebration-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    /* -- Disabled link style -- */
+    .sub-area-link.disabled {
       pointer-events: none;
-      z-index: 9999;
+      opacity: 0.55;
     }
 
-    /* ── Floating Emojis ── */
-    .emoji-float {
-      position: fixed;
-      font-size: 2rem;
+    a.gerencia-btn.disabled {
       pointer-events: none;
-      z-index: 9998;
-      animation: emoji-rise 3s ease-out forwards;
+      opacity: 0.55;
     }
 
-    @keyframes emoji-rise {
-      0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
-      20% { opacity: 1; transform: translateY(-60px) scale(1.2) rotate(20deg); }
-      100% { opacity: 0; transform: translateY(-400px) scale(0.8) rotate(40deg); }
+    /* -- Footer -- */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.75rem;
+      color: var(--text-3);
     }
 
-    /* ── Screen flash ── */
-    .screen-flash {
-      position: fixed;
-      inset: 0;
-      background: white;
-      z-index: 10000;
-      pointer-events: none;
-      animation: flash-out 0.6s ease-out forwards;
+    .footer a {
+      color: var(--text-3);
+      text-decoration: none;
     }
 
-    @keyframes flash-out {
-      0% { opacity: 0.7; }
-      100% { opacity: 0; }
+    .footer a:hover {
+      color: var(--text-2);
     }
 
-    /* ── Fade transition ── */
-    .fade-in {
-      animation: fadeIn 200ms ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Responsive ── */
+    /* -- Responsive -- */
     @media (max-width: 600px) {
-      main { padding: 20px 16px 80px; }
-      .step-title { font-size: 1.3rem; }
-      .path-toggle { flex-direction: column; }
-      .prompt-text { padding: 16px; font-size: 0.85rem; }
-      .fields-section { padding: 16px; }
-      .header-inner { padding-bottom: 12px; }
+      main { padding: 24px 16px 60px; }
+      .page-title { font-size: 1.3rem; }
+      .gerencia-btn { padding: 14px 16px; min-height: 56px; }
+      .sub-area-link { padding: 10px 16px 10px 36px; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="header-inner">
-      <div class="logo"><span class="logo-accent">Ruta Cliente 2026</span> — AquaChile</div>
+      <div class="logo"><span class="logo-accent">Ruta de Innovacion 2026</span> &mdash; AquaChile</div>
       <span class="logo-sub">by brinca.com</span>
     </div>
   </header>
 
-  <nav class="step-nav">
-    <div class="step-nav-inner" id="step-nav"></div>
-  </nav>
-
   <main>
-    <div id="step-content"></div>
+    <h1 class="page-title">Selecciona tu gerencia</h1>
+    <p class="page-subtitle">Elige tu area para acceder al material de apoyo del taller</p>
+
+    <div class="card-list" id="card-list"></div>
   </main>
 
+  <footer class="footer">
+    <a href="https://brinca.com" target="_blank" rel="noopener">by brinca.com</a>
+  </footer>
+
 <script>
-// ── Data ──
+(function() {
 
-const STEPS = [
-  {
-    id: 1,
-    title: "Context",
-    subtitle: "Set up your AI co-creator",
-    duration: null,
-    tip: { type: "action", text: 'Attach the company .md file to your first message in Copilot. <a href="resumen_memoria.md" download style="color:inherit;font-weight:700;text-decoration:underline;">Download it here</a>.' },
-    paths: null,
-    fields: [
-      { id: "name", label: "Your name", placeholder: "e.g., Maria Gonzalez", multiline: false },
-      { id: "role", label: "Your role, department & key details", placeholder: "e.g., Sales Coordinator in the Commercial team, based in Miami, responsible for US East Coast clients", multiline: true }
-    ],
-    prompt: `You are an Expert in Innovation and Aquaculture.
-
-I am {{name}} and I work as {{role}}.
-
-I'm participating in the Advanced Ideation Workshop 'Innovation Route 2026' at AquaChile, our internal innovation program.
-
-Your goal is to help me generate a high-impact innovation idea for the company (one that can impact EBITDA).
-
-As context, I'm attaching this .md file with important information about our company.
-
-I want us to move step by step and for you not to jump ahead with suggestions — we'll co-create together. Our first step is to dive deeper into a challenge and problem I've identified.`,
-    fieldFallbacks: {
-      name: "your name",
-      role: "your role, department, and key details about what you do"
+  var GERENCIAS = [
+    {
+      id: 'produccion',
+      label: 'G. Produccion',
+      expandable: true,
+      subAreas: [
+        { label: 'Agua Dulce / Piscicultura', param: 'produccion-agua-dulce', active: true },
+        { label: 'Agua Mar / Centro de Cultivo', param: 'produccion-agua-mar', active: true },
+        { label: 'Reproductores', param: 'produccion-reproductores', active: false },
+        { label: 'Logistica', param: 'produccion-logistica', active: false },
+        { label: 'Alimento', param: 'produccion-alimento', active: false },
+        { label: 'Servicio a la Produccion', param: 'produccion-servicio', active: false }
+      ]
+    },
+    {
+      id: 'industrial',
+      label: 'G. Industrial',
+      expandable: false,
+      link: 'workshop.html?w=industrial',
+      active: false
+    },
+    {
+      id: 'admin-finanzas',
+      label: 'G. Administracion y Finanzas',
+      expandable: false,
+      link: 'workshop.html?w=admin-finanzas',
+      active: false
+    },
+    {
+      id: 'comercial',
+      label: 'G. Comercial',
+      expandable: true,
+      subAreas: [
+        { label: 'Chile', param: 'comercial-chile', active: false },
+        { label: 'Miami (English)', param: 'comercial-miami', active: true }
+      ]
+    },
+    {
+      id: 'personas',
+      label: 'G. Personas',
+      expandable: false,
+      link: 'workshop.html?w=personas',
+      active: false
+    },
+    {
+      id: 'sostenibilidad',
+      label: 'G. Sostenibilidad',
+      expandable: false,
+      link: 'workshop.html?w=sostenibilidad',
+      active: false
     }
-  },
-  {
-    id: 2,
-    title: "Challenge & Problem",
-    subtitle: "Define what you want to solve",
-    duration: "10 min",
-    tip: { type: "tip", text: "The better you define the problem, the better your solution will be. Take your time here." },
-    challengeRef: true,
-    paths: [
-      {
-        id: "a",
-        label: "I already know my problem",
-        fields: [
-          { id: "challenge2a", label: "The challenge you chose", placeholder: "e.g., Challenge #5: Inventory Management — How might we standardize...", multiline: true },
-          { id: "problem", label: "The problem or opportunity you see", placeholder: "e.g., Currently each branch manages frozen inventory with different spreadsheets, causing stock discrepancies and lost sales...", multiline: true }
-        ],
-        prompt: `The challenge I'd like to tackle is: {{challenge2a}}.
+  ];
 
-Also, I already know a specific problem within this challenge that interests me. It's about {{problem}}.
+  var expandedState = {};
 
-Ask me good questions to dive deeper into this problem based on my experience and knowledge. Ask me 3–5 good questions to start and then let's keep talking!`,
-        fieldFallbacks: {
-          challenge2a: "the Innovation Route challenge you want to address",
-          problem: "the problem or opportunity you see"
-        }
-      },
-      {
-        id: "b",
-        label: "Help me find a problem",
-        fields: [
-          { id: "challenge2b", label: "The challenge you chose", placeholder: "e.g., Challenge #5: Inventory Management — How might we standardize...", multiline: true }
-        ],
-        prompt: `The challenge I'd like to tackle is: {{challenge2b}}.
-
-I find this challenge interesting, but I haven't yet identified a specific problem or opportunity.
-
-Ask me good questions to identify a specific problem or opportunity within this challenge, based on my experience and knowledge. Ask me 3–5 good questions to start and then let's keep talking!`,
-        fieldFallbacks: {
-          challenge2b: "the Innovation Route challenge you want to address"
-        }
-      }
-    ],
-    fields: null,
-    prompt: null,
-    fieldFallbacks: null
-  },
-  {
-    id: 3,
-    title: "Solution",
-    subtitle: "Co-design your innovation idea",
-    duration: "10 min",
-    tip: { type: "tip", text: "It's OK if your idea is rough. Copilot will help you refine it." },
-    paths: [
-      {
-        id: "a",
-        label: "I already have an idea",
-        fields: [
-          { id: "idea", label: "Your preliminary idea", placeholder: "e.g., A centralized real-time inventory dashboard that connects all branches via a single API...", multiline: true }
-        ],
-        prompt: `Now that we better understand the problem, let's think about how to solve it in a way that creates a positive impact for stakeholders and contributes to the company's EBITDA.
-
-I already have a preliminary solution idea! It's about {{idea}}.
-
-Ask me good questions to go deeper into this idea. I want us to use it as a starting point to reach the best possible solution.`,
-        fieldFallbacks: {
-          idea: "the idea you have so far"
-        }
-      },
-      {
-        id: "b",
-        label: "I need help brainstorming",
-        fields: [],
-        prompt: `Now that we better understand the problem, let's think about how to solve it in a way that creates a positive impact for stakeholders and contributes to the company's EBITDA.
-
-I don't have a clear idea yet of how to solve this problem or opportunity.
-
-Help me brainstorm different ways to solve the problem together.`,
-        fieldFallbacks: {}
-      }
-    ],
-    fields: null,
-    prompt: null,
-    fieldFallbacks: null
-  },
-  {
-    id: 4,
-    title: "Iterate with Feedback",
-    subtitle: "Integrate your colleague's input",
-    duration: "5 min",
-    tip: { type: "human", text: "Before using this prompt: share your idea with a colleague (7 min each). Bring their best feedback here." },
-    paths: null,
-    fields: [
-      { id: "feedback", label: "Your colleague's feedback (the points that resonated most)", placeholder: "e.g., She suggested focusing on frozen products first since that's where most discrepancies happen. Also recommended integrating with the existing SAP system rather than building from scratch...", multiline: true }
-    ],
-    prompt: `I just met with a colleague who gave me excellent feedback. Here's what they said:
-
-{{feedback}}
-
-Your Task:
-- Analyze how this feedback changes or improves the original solution.
-- Propose how to integrate this suggestion without losing technical feasibility.
-- Ask me: 'Does this new version fit your solution, or do you want to keep iterating?'`,
-    fieldFallbacks: {
-      feedback: "WRITE HERE THE FEEDBACK POINTS THAT RESONATED MOST WITH YOU"
-    }
-  },
-  {
-    id: 5,
-    title: "Impact & Benefits",
-    subtitle: "Build the economic case",
-    duration: "10 min",
-    tip: { type: "tip", text: "Copilot will think like a CFO. No made-up numbers — just economic logic you can defend." },
-    paths: null,
-    fields: [],
-    prompt: `Now act as AquaChile's CFO: with a business vision, focused on profitability and also on risk management.
-
-I want you to help me understand the potential impact of my idea because I'll need to defend the investment by demonstrating its return. Don't give me made-up numbers. Help me build the economic logic.
-
-- EBITDA Connection: Analyze my solution and explain step by step how this improvement impacts the Income Statement.
-- Key Data: Think about and list the key data I need to gather to validate the EBITDA impact of my idea.
-- Profitability Booster: Give me advice — what small modification could I make to my idea to increase its EBITDA impact even further?`,
-    fieldFallbacks: {}
-  },
-  {
-    id: 6,
-    title: "Resources",
-    subtitle: "What do you need to make it happen?",
-    duration: "5 min",
-    tip: { type: "tip", text: "Think about hidden costs: training, change management, maintenance, integrations." },
-    paths: null,
-    fields: [],
-    prompt: `Act as a Senior Project Implementation Manager.
-
-YOUR TASK: Your goal is to break down the real "Shopping List" to make this project work, ensuring I don't miss any hidden costs or resources.
-
-INSTRUCTIONS:
-- Analyze my solution: Identify if it requires Hardware, Software, People, Training, or Infrastructure Changes.
-- The Interrogation: Don't ask me generic questions. Based on my specific idea, ask me 3 good questions about resources I probably didn't consider.`,
-    fieldFallbacks: {}
-  },
-  {
-    id: 7,
-    title: "Final Compilation",
-    subtitle: "Get your submission-ready summary",
-    duration: "5 min",
-    tip: { type: "action", text: "This is the last prompt. It compiles everything for the Innovation Route submission form." },
-    paths: null,
-    fields: [],
-    prompt: `Now act as an Expert in Innovation Project Formulation.
-
-During this session we've defined my root problem, my technical solution, the required resources, and the impact estimate.
-
-Please compile all the information from our conversation and draft the final answers for the form we'll use to submit our idea. Use executive, persuasive, and direct language.
-
-COMPLETE THESE FIELDS (and suggest a title):
-- CHALLENGE & PROBLEM: Summarize — What problem did you observe? Where does it occur? And why is it critical to solve?
-- DESCRIBE YOUR IDEA: Explain simply — What is it? And how does it work technically?
-- IMPACT & BENEFITS: Write the value logic. How does it generate value for AquaChile?
-- RESOURCES & EFFORT: List what's needed (People, time, equipment) and the estimated cost level.`,
-    fieldFallbacks: {},
-    submitUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdIa5IM6AZ2gRk9P8-M2rW0HElriV1Oh2n6KMuSwAKKDfo4Wg/viewform"
-  }
-];
-
-const CHALLENGES = [
-  {
-    pillar: "Process Efficiency & Productivity",
-    items: [
-      { num: 1, title: "Processes", hmw: "How might we redesign the way we work to achieve the highest excellence in our processes, continue growing, and add value to our clients?" },
-      { num: 2, title: "Land Traceability", hmw: "How might we gain visibility and optimize the logistics flow between the airport, the warehouses, and the branch?" },
-      { num: 3, title: "Product Quality", hmw: "How might we optimize operational coordination (logistics-production) to guarantee product integrity in strategic markets — focusing on airport reception, transfer to the branch, and dispatch to clients?" }
-    ]
-  },
-  {
-    pillar: "Digital Transformation: Data & Automation",
-    items: [
-      { num: 4, title: "Data-Driven Decisions", hmw: "How might we enhance our capabilities through the use of technology and data to make smarter and faster decisions?" },
-      { num: 5, title: "Inventory Management", hmw: "How might we standardize a single, universal inventory management system for frozen products that allows sales and operations teams to view their stock, commit sales, and validate stock status?" },
-      { num: 6, title: "Operations", hmw: "How might we automate document management and exchange in the export process to reduce dependency on manual channels and reduce errors?" }
-    ]
-  },
-  {
-    pillar: "Sustainability: Environment & Community",
-    items: [
-      { num: 7, title: "Positioning", hmw: "How might we position our brand globally, leveraging our track record and high standards in animal care and environmental stewardship?" },
-      { num: 8, title: "Sustainable Value", hmw: "How might we integrate sustainability attributes into our brand strategy so that customers prefer our products?" }
-    ]
-  },
-  {
-    pillar: "People First: Employees, Clients & Suppliers",
-    items: [
-      { num: 9, title: "People First", hmw: "How might we ensure that AquaChile is the most trusted company in the market, taking care of our people and putting our clients at the center?" },
-      { num: 10, title: "Brand Differentiation", hmw: "How might we elevate the perceived value of our brands (Aqua Singular, Verlasso) in global markets to increase customer preference?" },
-      { num: 11, title: "Market Loyalty", hmw: "How might we design differentiated services and value propositions by customer segment that maximize loyalty and business impact, even under adverse market conditions?" }
-    ]
-  }
-];
-
-const SHORT_TITLES = ["Context", "Challenge", "Solution", "Iterate", "Impact", "Resources", "Summary"];
-
-// ── State ──
-let currentStep = 0;
-let activePaths = { 2: "a", 3: "a" };
-let fieldValues = {};
-let challengePanelOpen = false;
-
-// ── Render ──
-
-function renderNav() {
-  const nav = document.getElementById('step-nav');
-  nav.innerHTML = STEPS.map((step, i) => `
-    <button class="step-pill ${i === currentStep ? 'active' : ''}" onclick="goToStep(${i})">
-      <span class="step-num">${step.id}</span>
-      <span class="step-label">${SHORT_TITLES[i]}</span>
-    </button>
-  `).join('');
-}
-
-function render() {
-  renderNav();
-  const container = document.getElementById('step-content');
-  const step = STEPS[currentStep];
-  const isPathStep = step.paths !== null;
-  const activePath = isPathStep ? step.paths.find(p => p.id === activePaths[step.id]) : null;
-
-  const fields = isPathStep ? (activePath?.fields || []) : (step.fields || []);
-  const promptTemplate = isPathStep ? activePath?.prompt : step.prompt;
-  const fallbacks = isPathStep ? (activePath?.fieldFallbacks || {}) : (step.fieldFallbacks || {});
-
-  let html = '<div class="fade-in">';
-
-  // Step header
-  html += `<div class="step-header">
-    <div class="step-header-top">
-      <span class="step-number">Step ${step.id}</span>
-      ${step.duration ? `<span class="step-duration">${step.duration}</span>` : ''}
-    </div>
-    <h1 class="step-title">${step.title}</h1>
-    <p class="step-subtitle">${step.subtitle}</p>
-  </div>`;
-
-  // Callout / tip
-  if (step.tip) {
-    html += `<div class="callout callout-${step.tip.type}">
-      <strong>${step.tip.type === 'tip' ? 'Tip' : step.tip.type === 'action' ? 'Important' : 'Human step first'}:</strong> ${step.tip.text}
-    </div>`;
+  function toggleExpand(id) {
+    expandedState[id] = !expandedState[id];
+    renderCards();
   }
 
-  // Challenge reference (step 2)
-  if (step.challengeRef) {
-    html += renderChallengeRef();
-  }
+  function renderCards() {
+    var container = document.getElementById('card-list');
+    var html = '';
 
-  // Path toggle
-  if (isPathStep) {
-    html += `<div class="path-toggle">
-      ${step.paths.map(p => `
-        <button class="path-btn ${activePaths[step.id] === p.id ? 'active' : ''}"
-                onclick="togglePath(${step.id}, '${p.id}')">
-          ${p.label}
-        </button>
-      `).join('')}
-    </div>`;
-  }
+    for (var i = 0; i < GERENCIAS.length; i++) {
+      var g = GERENCIAS[i];
+      var isExpanded = expandedState[g.id] || false;
 
-  // Fields section
-  if (fields.length > 0) {
-    html += `<div class="fields-section">
-      <div class="fields-title">Fill in your details</div>
-      ${fields.map(f => `
-        <div class="field-group">
-          <label class="field-label" for="field-${f.id}">${f.label}</label>
-          ${f.multiline
-            ? `<textarea class="field-textarea" id="field-${f.id}" placeholder="${f.placeholder}" oninput="onFieldInput('${f.id}', this.value)">${fieldValues[f.id] || ''}</textarea>`
-            : `<input class="field-input" type="text" id="field-${f.id}" placeholder="${f.placeholder}" value="${fieldValues[f.id] || ''}" oninput="onFieldInput('${f.id}', this.value)">`
+      if (g.expandable) {
+        html += '<div class="gerencia-card' + (isExpanded ? ' expanded' : '') + '" data-id="' + g.id + '">';
+        html += '<button class="gerencia-btn" onclick="window.__toggleExpand(\'' + g.id + '\')" type="button">';
+        html += '<span class="label">' + g.label + '</span>';
+        html += '<svg class="chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 5 13 10 7 15"/></svg>';
+        html += '</button>';
+
+        html += '<div class="sub-areas">';
+        html += '<div class="sub-areas-inner">';
+
+        for (var j = 0; j < g.subAreas.length; j++) {
+          var sub = g.subAreas[j];
+          var isActive = sub.active;
+          var linkClass = 'sub-area-link' + (isActive ? ' active' : ' disabled');
+          var href = 'workshop.html?w=' + sub.param;
+
+          html += '<a class="' + linkClass + '" href="' + href + '">';
+          html += '<span class="label">' + sub.label + '</span>';
+          if (isActive) {
+            html += '<span class="status-dot"></span>';
+          } else {
+            html += '<span class="badge-soon">Proximamente</span>';
           }
-        </div>
-      `).join('')}
-    </div>`;
-  }
+          html += '</a>';
+        }
 
-  // Prompt card
-  const assembledPrompt = assemblePrompt(promptTemplate, fallbacks);
-  const displayPrompt = assemblePromptHTML(promptTemplate, fallbacks);
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
 
-  html += `<div class="prompt-card">
-    <div class="prompt-card-header">
-      <span class="prompt-card-label">Prompt to copy into Copilot</span>
-      <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">
-        <svg id="copy-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="5" y="5" width="9" height="9" rx="1.5"/>
-          <path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/>
-        </svg>
-        <span id="copy-text">Copy</span>
-      </button>
-    </div>
-    <div class="prompt-text" id="prompt-display">${displayPrompt}</div>
-  </div>`;
+      } else {
+        var isActive = g.active;
+        var cardClass = 'gerencia-card';
+        var btnClass = 'gerencia-btn' + (isActive ? '' : ' disabled');
 
-  // Submit CTA (final step only)
-  if (step.submitUrl) {
-    html += `<div class="submit-cta" id="submit-cta">
-      <div class="submit-cta-label">Final Step</div>
-      <div class="submit-cta-title">Submit your idea to Ruta de Innovaci\u00f3n 2026</div>
-      <div class="submit-cta-desc">Copy Copilot's output and paste it into the submission form.</div>
-      <a class="submit-cta-btn" id="submit-btn" href="${step.submitUrl}" target="_blank" rel="noopener" onclick="launchFireworks(event)">
-        Open Submission Form
-      </a>
-    </div>`;
-  }
-
-  // Navigation buttons
-  html += `<div class="step-nav-btns">
-    <button class="nav-btn" onclick="goToStep(${currentStep - 1})" ${currentStep === 0 ? 'disabled' : ''}>
-      ← Previous
-    </button>
-    ${currentStep < STEPS.length - 1
-      ? `<button class="nav-btn nav-btn-next" onclick="goToStep(${currentStep + 1})">Next →</button>`
-      : ''}
-  </div>`;
-
-  html += '</div>';
-  container.innerHTML = html;
-}
-
-function renderChallengeRef() {
-  let html = `<div class="challenge-ref">
-    <button class="challenge-toggle ${challengePanelOpen ? 'open' : ''}" onclick="toggleChallenges()">
-      <span class="arrow">▶</span> View the 11 challenges
-    </button>
-    <div class="challenge-panel ${challengePanelOpen ? 'open' : ''}">`;
-
-  CHALLENGES.forEach(pillar => {
-    html += `<div class="challenge-pillar">
-      <div class="pillar-name">${pillar.pillar}</div>
-      ${pillar.items.map(c => `
-        <div class="challenge-item" onclick="pickChallenge(${c.num}, '${c.title}', this)">
-          <strong>#${c.num} ${c.title}:</strong> ${c.hmw}
-        </div>
-      `).join('')}
-    </div>`;
-  });
-
-  html += `</div></div>`;
-  return html;
-}
-
-function assemblePrompt(template, fallbacks) {
-  if (!template) return '';
-  return template.replace(/\{\{(\w+)\}\}/g, (match, id) => {
-    const value = fieldValues[id]?.trim();
-    return value || `[${fallbacks[id] || id}]`;
-  });
-}
-
-function assemblePromptHTML(template, fallbacks) {
-  if (!template) return '';
-  const escaped = template
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-
-  return escaped.replace(/\{\{(\w+)\}\}/g, (match, id) => {
-    const value = fieldValues[id]?.trim();
-    if (value) {
-      return `<span class="field-highlight">${value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</span>`;
-    }
-    return `<span class="field-highlight">[${fallbacks[id] || id}]</span>`;
-  });
-}
-
-// ── Actions ──
-
-function goToStep(index) {
-  if (index < 0 || index >= STEPS.length) return;
-  currentStep = index;
-  render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function togglePath(stepId, pathId) {
-  activePaths[stepId] = pathId;
-  render();
-}
-
-function onFieldInput(fieldId, value) {
-  fieldValues[fieldId] = value;
-  // Live-update prompt display without full re-render
-  const step = STEPS[currentStep];
-  const isPathStep = step.paths !== null;
-  const activePath = isPathStep ? step.paths.find(p => p.id === activePaths[step.id]) : null;
-  const template = isPathStep ? activePath?.prompt : step.prompt;
-  const fallbacks = isPathStep ? (activePath?.fieldFallbacks || {}) : (step.fieldFallbacks || {});
-  const display = document.getElementById('prompt-display');
-  if (display && template) {
-    display.innerHTML = assemblePromptHTML(template, fallbacks);
-  }
-}
-
-function toggleChallenges() {
-  challengePanelOpen = !challengePanelOpen;
-  const toggle = document.querySelector('.challenge-toggle');
-  const panel = document.querySelector('.challenge-panel');
-  if (toggle) toggle.classList.toggle('open');
-  if (panel) panel.classList.toggle('open');
-}
-
-function pickChallenge(num, title, el) {
-  const step = STEPS[currentStep];
-  const pathId = activePaths[step.id];
-  const fieldId = pathId === 'a' ? 'challenge2a' : 'challenge2b';
-  const challenge = CHALLENGES.flatMap(p => p.items).find(c => c.num === num);
-  const text = `Challenge #${num}: ${title} — ${challenge.hmw}`;
-  fieldValues[fieldId] = text;
-  const input = document.getElementById(`field-${fieldId}`);
-  if (input) input.value = text;
-  onFieldInput(fieldId, text);
-  challengePanelOpen = false;
-  render();
-}
-
-async function copyPrompt() {
-  const step = STEPS[currentStep];
-  const isPathStep = step.paths !== null;
-  const activePath = isPathStep ? step.paths.find(p => p.id === activePaths[step.id]) : null;
-  const template = isPathStep ? activePath?.prompt : step.prompt;
-  const fallbacks = isPathStep ? (activePath?.fieldFallbacks || {}) : (step.fieldFallbacks || {});
-  const text = assemblePrompt(template, fallbacks);
-
-  try {
-    await navigator.clipboard.writeText(text);
-    const btn = document.getElementById('copy-btn');
-    const icon = document.getElementById('copy-icon');
-    const label = document.getElementById('copy-text');
-    btn.classList.add('copied');
-    label.textContent = 'Copied!';
-    icon.innerHTML = '<polyline points="4 8 7 11 12 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      label.textContent = 'Copy';
-      icon.innerHTML = '<rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 009.5 2h-6A1.5 1.5 0 002 3.5v6A1.5 1.5 0 003.5 11H5"/>';
-    }, 2000);
-  } catch (err) {
-    // Fallback for older browsers
-    const textarea = document.createElement('textarea');
-    textarea.value = text;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = '0';
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-  }
-}
-
-// ── Celebration Engine ──
-
-const CONFETTI_COLORS = ['#FF7600', '#FFa040', '#FFcc33', '#65bd7d', '#198fd9', '#ff4d6a', '#a855f7', '#ffffff'];
-const CELEBRATION_EMOJIS = ['🎉', '🚀', '🏆', '⭐', '🎊', '💡', '🔥', '✨', '🥇', '💪'];
-
-let celebrationCanvas = null;
-let celebrationCtx = null;
-let particles = [];
-let fireworkParticles = [];
-let animationId = null;
-let partyMode = false;
-let partyInterval = null;
-
-function ensureCanvas() {
-  if (celebrationCanvas) return;
-  celebrationCanvas = document.createElement('canvas');
-  celebrationCanvas.id = 'celebration-canvas';
-  document.body.appendChild(celebrationCanvas);
-  celebrationCtx = celebrationCanvas.getContext('2d');
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-}
-
-function resizeCanvas() {
-  if (!celebrationCanvas) return;
-  celebrationCanvas.width = window.innerWidth;
-  celebrationCanvas.height = window.innerHeight;
-}
-
-// Confetti particle
-function createConfetti(x, y, count) {
-  for (let i = 0; i < count; i++) {
-    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5);
-    const velocity = 4 + Math.random() * 8;
-    particles.push({
-      x, y,
-      vx: Math.cos(angle) * velocity * (0.5 + Math.random()),
-      vy: Math.sin(angle) * velocity * (0.5 + Math.random()) - 3,
-      w: 4 + Math.random() * 6,
-      h: 6 + Math.random() * 8,
-      color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
-      rotation: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 12,
-      gravity: 0.12 + Math.random() * 0.08,
-      drag: 0.98,
-      opacity: 1,
-      life: 160 + Math.random() * 80,
-      age: 0,
-      type: Math.random() > 0.3 ? 'rect' : 'circle'
-    });
-  }
-}
-
-// Firework burst
-function createFirework(x, y) {
-  const color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
-  const sparkCount = 50 + Math.floor(Math.random() * 40);
-  for (let i = 0; i < sparkCount; i++) {
-    const angle = (Math.PI * 2 * i) / sparkCount + (Math.random() - 0.5) * 0.3;
-    const velocity = 2 + Math.random() * 5;
-    fireworkParticles.push({
-      x, y,
-      vx: Math.cos(angle) * velocity,
-      vy: Math.sin(angle) * velocity,
-      radius: 1.5 + Math.random() * 2,
-      color,
-      opacity: 1,
-      life: 50 + Math.random() * 40,
-      age: 0,
-      gravity: 0.04,
-      trail: []
-    });
-  }
-}
-
-// Rocket that goes up then bursts
-function launchRocket(x) {
-  const targetY = 80 + Math.random() * (window.innerHeight * 0.3);
-  fireworkParticles.push({
-    x, y: window.innerHeight + 10,
-    vx: (Math.random() - 0.5) * 1.5,
-    vy: -(8 + Math.random() * 4),
-    radius: 3,
-    color: '#FFcc33',
-    opacity: 1,
-    life: 999,
-    age: 0,
-    gravity: 0.04,
-    isRocket: true,
-    targetY,
-    trail: []
-  });
-}
-
-function spawnFloatingEmoji(x, y) {
-  const emoji = document.createElement('div');
-  emoji.className = 'emoji-float';
-  emoji.textContent = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
-  emoji.style.left = (x + (Math.random() - 0.5) * 200) + 'px';
-  emoji.style.top = y + 'px';
-  emoji.style.fontSize = (1.5 + Math.random() * 1.5) + 'rem';
-  document.body.appendChild(emoji);
-  setTimeout(() => emoji.remove(), 3000);
-}
-
-function flashScreen() {
-  const flash = document.createElement('div');
-  flash.className = 'screen-flash';
-  document.body.appendChild(flash);
-  setTimeout(() => flash.remove(), 600);
-}
-
-function animateCelebration() {
-  if (!celebrationCtx) return;
-  celebrationCtx.clearRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
-
-  // Draw confetti
-  for (let i = particles.length - 1; i >= 0; i--) {
-    const p = particles[i];
-    p.age++;
-    p.vx *= p.drag;
-    p.vy += p.gravity;
-    p.vy *= 0.995;
-    p.x += p.vx;
-    p.y += p.vy;
-    p.rotation += p.rotSpeed;
-    if (p.age > p.life * 0.7) p.opacity = Math.max(0, 1 - (p.age - p.life * 0.7) / (p.life * 0.3));
-    if (p.age > p.life) { particles.splice(i, 1); continue; }
-
-    celebrationCtx.save();
-    celebrationCtx.translate(p.x, p.y);
-    celebrationCtx.rotate(p.rotation * Math.PI / 180);
-    celebrationCtx.globalAlpha = p.opacity;
-    celebrationCtx.fillStyle = p.color;
-    if (p.type === 'circle') {
-      celebrationCtx.beginPath();
-      celebrationCtx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
-      celebrationCtx.fill();
-    } else {
-      celebrationCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-    }
-    celebrationCtx.restore();
-  }
-
-  // Draw firework sparks
-  for (let i = fireworkParticles.length - 1; i >= 0; i--) {
-    const p = fireworkParticles[i];
-    p.age++;
-    p.vy += p.gravity;
-    p.x += p.vx;
-    p.y += p.vy;
-
-    // Rocket logic
-    if (p.isRocket) {
-      // Trail
-      celebrationCtx.beginPath();
-      celebrationCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      celebrationCtx.fillStyle = p.color;
-      celebrationCtx.globalAlpha = 1;
-      celebrationCtx.fill();
-      // Rocket trail sparks
-      for (let t = 0; t < 2; t++) {
-        particles.push({
-          x: p.x + (Math.random() - 0.5) * 4,
-          y: p.y,
-          vx: (Math.random() - 0.5) * 1,
-          vy: 1 + Math.random() * 2,
-          w: 2, h: 2,
-          color: Math.random() > 0.5 ? '#FFcc33' : '#FF7600',
-          rotation: 0, rotSpeed: 0,
-          gravity: 0.02, drag: 0.97,
-          opacity: 1, life: 20 + Math.random() * 15, age: 0,
-          type: 'circle'
-        });
+        html += '<div class="' + cardClass + '">';
+        html += '<a class="' + btnClass + '" href="' + g.link + '">';
+        html += '<span class="label">' + g.label + '</span>';
+        if (isActive) {
+          html += '<span class="status-dot"></span>';
+        } else {
+          html += '<span class="badge-soon">Proximamente</span>';
+        }
+        html += '</a>';
+        html += '</div>';
       }
-      if (p.y <= p.targetY) {
-        createFirework(p.x, p.y);
-        fireworkParticles.splice(i, 1);
-      }
-      continue;
     }
 
-    // Trail
-    p.trail.push({ x: p.x, y: p.y });
-    if (p.trail.length > 6) p.trail.shift();
-
-    if (p.age > p.life * 0.5) p.opacity = Math.max(0, 1 - (p.age - p.life * 0.5) / (p.life * 0.5));
-    if (p.age > p.life) { fireworkParticles.splice(i, 1); continue; }
-
-    // Draw trail
-    if (p.trail.length > 1) {
-      celebrationCtx.beginPath();
-      celebrationCtx.moveTo(p.trail[0].x, p.trail[0].y);
-      for (let t = 1; t < p.trail.length; t++) {
-        celebrationCtx.lineTo(p.trail[t].x, p.trail[t].y);
-      }
-      celebrationCtx.strokeStyle = p.color;
-      celebrationCtx.globalAlpha = p.opacity * 0.3;
-      celebrationCtx.lineWidth = p.radius * 0.8;
-      celebrationCtx.stroke();
-    }
-
-    celebrationCtx.beginPath();
-    celebrationCtx.arc(p.x, p.y, p.radius * (0.5 + p.opacity * 0.5), 0, Math.PI * 2);
-    celebrationCtx.fillStyle = p.color;
-    celebrationCtx.globalAlpha = p.opacity;
-    celebrationCtx.fill();
+    container.innerHTML = html;
   }
 
-  celebrationCtx.globalAlpha = 1;
+  window.__toggleExpand = toggleExpand;
 
-  if (particles.length > 0 || fireworkParticles.length > 0 || partyMode) {
-    animationId = requestAnimationFrame(animateCelebration);
-  } else {
-    if (celebrationCanvas) {
-      celebrationCtx.clearRect(0, 0, celebrationCanvas.width, celebrationCanvas.height);
-    }
-  }
-}
+  renderCards();
 
-function startPartyMode() {
-  if (partyMode) return;
-  partyMode = true;
-  const w = () => window.innerWidth;
-  const h = () => window.innerHeight;
-
-  // Endless rockets every 1.2s
-  partyInterval = setInterval(() => {
-    launchRocket(w() * 0.1 + Math.random() * w() * 0.8);
-    if (Math.random() > 0.4) launchRocket(w() * 0.1 + Math.random() * w() * 0.8);
-  }, 1200);
-
-  // Confetti bursts from random edges every 2s
-  setInterval(() => {
-    if (!partyMode) return;
-    const side = Math.floor(Math.random() * 4);
-    if (side === 0) createConfetti(Math.random() * w(), 0, 40);
-    else if (side === 1) createConfetti(w(), Math.random() * h(), 40);
-    else if (side === 2) createConfetti(Math.random() * w(), h(), 40);
-    else createConfetti(0, Math.random() * h(), 40);
-  }, 2000);
-
-  // Emoji rain every 800ms
-  setInterval(() => {
-    if (!partyMode) return;
-    spawnFloatingEmoji(Math.random() * w(), h() * 0.2 + Math.random() * h() * 0.5);
-  }, 800);
-}
-
-function startCelebrationLoop() {
-  if (animationId) cancelAnimationFrame(animationId);
-  animationId = requestAnimationFrame(animateCelebration);
-}
-
-// Confetti burst when step 7 loads
-function celebrateStepLoad() {
-  ensureCanvas();
-  const cta = document.getElementById('submit-cta');
-  if (!cta) return;
-  const rect = cta.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-
-  // Staggered confetti bursts
-  createConfetti(cx, cy, 60);
-  setTimeout(() => createConfetti(cx - 100, cy - 20, 30), 200);
-  setTimeout(() => createConfetti(cx + 100, cy - 20, 30), 400);
-
-  // Floating emojis
-  for (let i = 0; i < 8; i++) {
-    setTimeout(() => spawnFloatingEmoji(cx, cy), i * 150);
-  }
-
-  startCelebrationLoop();
-}
-
-// Full fireworks show on submit click
-function launchFireworks(e) {
-  ensureCanvas();
-  flashScreen();
-
-  const w = window.innerWidth;
-
-  // Wave 1: immediate burst from click position
-  const rect = e.target.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-  createConfetti(cx, cy, 100);
-
-  // Floating emojis rain
-  for (let i = 0; i < 15; i++) {
-    setTimeout(() => {
-      spawnFloatingEmoji(
-        Math.random() * w,
-        window.innerHeight * 0.3 + Math.random() * window.innerHeight * 0.4
-      );
-    }, i * 200);
-  }
-
-  // Wave 2: rockets from bottom
-  for (let i = 0; i < 5; i++) {
-    setTimeout(() => {
-      launchRocket(w * 0.15 + Math.random() * w * 0.7);
-    }, 300 + i * 400);
-  }
-
-  // Wave 3: more rockets
-  for (let i = 0; i < 4; i++) {
-    setTimeout(() => {
-      launchRocket(w * 0.1 + Math.random() * w * 0.8);
-    }, 2200 + i * 350);
-  }
-
-  // Wave 4: confetti cannons from sides
-  setTimeout(() => {
-    createConfetti(0, window.innerHeight * 0.4, 80);
-    createConfetti(w, window.innerHeight * 0.4, 80);
-  }, 1500);
-
-  setTimeout(() => {
-    createConfetti(w / 2, 0, 120);
-  }, 2800);
-
-  // After the initial show, keep the party going forever
-  setTimeout(() => startPartyMode(), 3500);
-
-  startCelebrationLoop();
-}
-
-// Hook into step rendering to trigger confetti on step 7
-const originalRender = render;
-render = function() {
-  originalRender();
-  if (STEPS[currentStep]?.submitUrl) {
-    setTimeout(celebrateStepLoad, 400);
-  }
-};
-
-// ── Init ──
-render();
+})();
 </script>
 </body>
 </html>
