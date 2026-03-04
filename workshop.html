@@ -1401,9 +1401,6 @@ function render() {
     '<button class="nav-btn" onclick="goToStep(' + (currentStep - 1) + ')" ' + (currentStep === 0 ? 'disabled' : '') + '>' +
     t('prev') +
     '</button>';
-  if (currentStep < STEPS.length - 1) {
-    html += '<button class="nav-btn nav-btn-next" onclick="goToStep(' + (currentStep + 1) + ')">' + t('next') + '</button>';
-  }
   html += '</div>';
 
   html += '</div>';
