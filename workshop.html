@@ -869,6 +869,8 @@ var I18N = {
     copied: "\u00a1Copiado!",
     prev: "\u2190 Anterior",
     next: "Siguiente \u2192",
+    promptReminder: "Recuerda: copia el prompt y pegalo en tu conversacion en Copilot.",
+    contextReminder: 'No olvides adjuntar el archivo .md de la empresa a tu mensaje. <a href="CONTEXTFILE" download style="color:inherit;font-weight:700;text-decoration:underline;">Descargalo aqui</a>.',
     promptLabel: "Prompt para copiar en Copilot",
     fillDetails: "Completa tus datos",
     openForm: "Abrir Formulario de Postulacion",
@@ -892,6 +894,8 @@ var I18N = {
     copied: "Copied!",
     prev: "\u2190 Previous",
     next: "Next \u2192",
+    promptReminder: "Remember: copy the prompt and paste it into your Copilot conversation.",
+    contextReminder: 'Don\'t forget to attach the company .md file to your message. <a href="CONTEXTFILE" download style="color:inherit;font-weight:700;text-decoration:underline;">Download it here</a>.',
     promptLabel: "Prompt to copy into Copilot",
     fillDetails: "Fill in your details",
     openForm: "Open Submission Form",
@@ -1396,12 +1400,19 @@ function render() {
       '</div>';
   }
 
-  // Navigation buttons
-  html += '<div class="step-nav-btns">' +
-    '<button class="nav-btn" onclick="goToStep(' + (currentStep - 1) + ')" ' + (currentStep === 0 ? 'disabled' : '') + '>' +
-    t('prev') +
-    '</button>';
-  html += '</div>';
+  // Context step: repeat download reminder
+  if (step.id === 1 && WORKSHOP.contextFile) {
+    html += '<div class="callout callout-action" style="margin-top:20px;">' +
+      '<strong>' + t('actionLabel') + ':</strong> ' + t('contextReminder').replace('CONTEXTFILE', WORKSHOP.contextFile) +
+      '</div>';
+  }
+
+  // Prompt reminder (all steps except submit)
+  if (!step.submitUrl && !step.isSubmitStep) {
+    html += '<div class="callout callout-tip" style="margin-top:20px;">' +
+      '<strong>' + t('tipLabel') + ':</strong> ' + t('promptReminder') +
+      '</div>';
+  }
 
   html += '</div>';
   container.innerHTML = html;
