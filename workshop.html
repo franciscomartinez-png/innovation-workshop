@@ -919,8 +919,8 @@ function t(key) {
 
 // -- SHORT TITLES --
 var SHORT_TITLES_MAP = {
-  es: ["Contexto", "Desafio", "Solucion", "Iterar", "Impacto", "Recursos", "Resumen"],
-  en: ["Context", "Challenge", "Solution", "Iterate", "Impact", "Resources", "Summary"]
+  es: ["Contexto", "Desafio", "Solucion", "Iterar", "Impacto", "Enviar"],
+  en: ["Context", "Challenge", "Solution", "Iterate", "Impact", "Send"]
 };
 
 // -- STEPS_ES --
@@ -1037,18 +1037,7 @@ var STEPS_ES = [
   },
   {
     id: 6,
-    title: "Recursos",
-    subtitle: "\u00bfQue necesitas para hacerlo realidad?",
-    duration: "5 min",
-    tip: { type: "tip", text: "Piensa en costos ocultos: capacitacion, gestion del cambio, mantencion, integraciones." },
-    paths: null,
-    fields: [],
-    prompt: "Actua como un Gerente Senior de Implementacion de Proyectos.\n\nTU TAREA: Tu objetivo es desglosar la \"Lista de Compras\" real para que este proyecto funcione, asegurando que no me falte ningun costo o recurso oculto.\n\nINSTRUCCIONES:\n- Analiza mi solucion: Identifica si requiere Hardware, Software, Personas, Capacitacion o Cambios de Infraestructura.\n- El Interrogatorio: No me hagas preguntas genericas. Basandote en mi idea especifica, hazme 3 buenas preguntas sobre recursos que probablemente no considere.",
-    fieldFallbacks: {}
-  },
-  {
-    id: 7,
-    title: "Compilacion Final",
+    title: "Enviar Idea",
     subtitle: "Obten tu resumen listo para postular",
     duration: "5 min",
     tip: { type: "action", text: "Este es el ultimo prompt. Compila todo para el formulario de postulacion de la Ruta de Innovacion." },
@@ -1174,18 +1163,7 @@ var STEPS_EN = [
   },
   {
     id: 6,
-    title: "Resources",
-    subtitle: "What do you need to make it happen?",
-    duration: "5 min",
-    tip: { type: "tip", text: "Think about hidden costs: training, change management, maintenance, integrations." },
-    paths: null,
-    fields: [],
-    prompt: "Act as a Senior Project Implementation Manager.\n\nYOUR TASK: Your goal is to break down the real \"Shopping List\" to make this project work, ensuring I don't miss any hidden costs or resources.\n\nINSTRUCTIONS:\n- Analyze my solution: Identify if it requires Hardware, Software, People, Training, or Infrastructure Changes.\n- The Interrogation: Don't ask me generic questions. Based on my specific idea, ask me 3 good questions about resources I probably didn't consider.",
-    fieldFallbacks: {}
-  },
-  {
-    id: 7,
-    title: "Final Compilation",
+    title: "Send Idea",
     subtitle: "Get your submission-ready summary",
     duration: "5 min",
     tip: { type: "action", text: "This is the last prompt. It compiles everything for the Innovation Route submission form." },
