@@ -4,7 +4,7 @@ window.WORKSHOP_DATA = {
   area: "Gerencia de Comunidades",
   lang: "es",
   contextFile: "resumen_memoria.md",
-  submitUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdIa5IM6AZ2gRk9P8-M2rW0HElriV1Oh2n6KMuSwAKKDfo4Wg/viewform",
+  submitUrl: "https://docs.google.com/forms/d/1cjrQ6uRxdsYX0h8ogtvcru0-hFXzQHh-xDCHnxG8whY/edit",
   comingSoon: false,
   challenges: [
     {
